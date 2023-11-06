@@ -3,6 +3,7 @@ import { ClearCartIcon, CartIcon, RemoveFromCartIcon } from "./Icons.jsx";
 import { useCart } from "../hooks/useCart.js";
 import { useState } from "react";
 import CartItem from "./CartItem.jsx";
+import { Link } from "react-router-dom";
 
 // function CartItem ({  image, price, title, quantity, addToCart, }) {
 //     return (
@@ -23,34 +24,68 @@ import CartItem from "./CartItem.jsx";
 //     )
 // }
 
-
 export function Cart() {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
   const cartCheckboxId = useId();
   const { cart, clearCart, addToCart } = useCart();
 
   const toggleMenu = () => {
-    setActive(!active)
-  }
+    setActive(!active);
+  };
 
   return (
     <>
-      <label onClick={toggleMenu} className="flex bg-blue-500 w-10 h-10 items-center justify-center text-white rounded-full" htmlFor="cart">
-        <CartIcon />
-      </label>
-      <input type="checkbox" id={cartCheckboxId} hidden />
+      <Link to="/">
+        <label
+          onClick={toggleMenu}
+          className="flex bg-blue-500 w-10 h-10 items-center justify-center text-white rounded-full"
+          htmlFor="cart"
+        >
+          Home
+        </label>
+      </Link>
 
-      <aside className={`fixed gap-2 border-2 border-red-500 flex flex-col bg-blue-400 overflow-y-scroll top-0 h-screen ${active ? "right-0" : "-right-full"} w-80 transition-all duration-200 ease-in-out rounded-lg overflow-hidden`}>
-        <div>
-          <ul>
-          {cart.map(product => ( 
-            <CartItem key={product.id} addToCart={() => addToCart(product)} {...product} />
-          ))}
-        </ul>
+      <input type="checkbox" id={cartCheckboxId} hidden />
+      <div>
         
-        <button className="fixed top-0 bg-blue-200 flex w-24 h-10 rounded-lg items-center justify-center" onClick={clearCart}>
-          <ClearCartIcon />
+      </div>
+
+      <aside className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+        <div>
+          <ul className="rounded-lg ">
+          <button className="flex gap-2 bg-blue-200 p-3 rounded-lg text-blue-600 font-semibold" onClick={clearCart}>
+          <ClearCartIcon />limpiar carrito
         </button>
+            {cart.map((product) => (
+              <CartItem
+                key={product.id}
+                addToCart={() => addToCart(product)}
+                {...product}
+              />
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-6 h-full rounded-lg bg-[#F9FAFB] p-6  md:mt-0 md:w-96">
+          <div class="mb-2 flex justify-between">
+            <p class="text-gray-700">Subtotal</p>
+            <p class="text-gray-700">$129.99</p>
+          </div>
+          <hr class="my-4" />
+          <div class="flex justify-between">
+            <p class="text-gray-700">Shipping</p>
+            <p class="text-gray-700">$4.99</p>
+          </div>
+          <hr class="my-4" />
+          <div class="flex justify-between">
+            <p class="text-lg font-bold">Total</p>
+            <div class="">
+              <p class="mb-1 text-lg font-bold">$134.98 MXM</p>
+            </div>
+          </div>
+          <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-white hover:bg-blue-600">
+            Check out
+          </button>
         </div>
       </aside>
     </>
