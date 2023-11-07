@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useId } from "react";
 import { useFilters } from "../hooks/useFilters";
+import logo from '../assets/logo.svg'
 
 
 export default function Filters() {
@@ -37,10 +38,11 @@ export default function Filters() {
   return (
     <>
       <section
-        className={`scrols fixed top-0 w-60 h-full overflow-y-scroll border-r-[.1px] border-[#b8b8b8] p-8 flex flex-col gap-10 bg-[#fff] lg:left-0 transition-all duration-300 ease-in-out z-50 ${
+        className={`scrols fixed top-0 w-60 h-full overflow-y-scroll border-r-[.1px] border-[#b8b8b8] p-8 flex flex-col gap-12 bg-[#fff] lg:left-0 transition-all duration-300 ease-in-out z-50 ${
           active ? "left-0" : "-left-full"
         }`}
       >
+        <img src={logo} alt="" />
         <div>
           <label htmlFor={minPriceFilterId}>Price</label>
           <input

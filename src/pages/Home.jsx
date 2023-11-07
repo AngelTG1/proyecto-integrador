@@ -5,13 +5,15 @@ import { useFilters } from '../hooks/useFilters'
 // import Cart from '../components/Cart'
 import Header from '../components/Header'
 import Products from '../components/Products'
+import HeaderStore from '../components/HeaderStore'
 
 function Home() {
     const { filterProducts } = useFilters()
 
     const filteredProducts = filterProducts(initialProducts)
   return (
-    <>
+    <>  
+        <HeaderStore/>
         <Header />
         <Products products={filteredProducts} />
     </>

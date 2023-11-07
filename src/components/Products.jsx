@@ -1,8 +1,5 @@
 import { useCart } from '../hooks/useCart.js'
-import { AddToCartIcon, RemoveFromCartIcon } from './Icons.jsx'
 import corazon from '../assets/corazon.svg'
-import ButtonQuit from './ButtonQuit.jsx'
-import ButtonStore from './ButtonStore.jsx'
 import ButtonOne from './ButtonOne.jsx'
 import ButtonTwo from './ButtonTwo.jsx'
 
@@ -14,7 +11,7 @@ export default function Products ({ products }) {
     }
     return (
         <>
-            <main className=' lg:pl-[250px] p-8 pt-72 lg:pt-40'>
+            <main className=' lg:pl-[250px] p-8 pt-72 lg:pt-20'>
                 <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10'>
                     {products.map(product => { 
                         const isProductInCart = checkProductInCart(product)

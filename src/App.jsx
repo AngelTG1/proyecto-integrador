@@ -1,7 +1,10 @@
-import Cart from './components/Cart.jsx';
-import Home from './pages/Home.jsx';
-import { Route, Routes } from 'react-router-dom';
-import { CartProvider } from './context/cart.jsx';
+// import Cart from './components/Cart.jsx';
+// import Home from './pages/Home.jsx';
+// import { Route, Routes } from 'react-router-dom';
+// import { CartProvider } from './context/cart.jsx';
+// import LoginForm from './components/LoginForm.jsx';
+
+import AppRouter from "./router/AppRouter"
 
 
 function App() {
@@ -10,13 +13,7 @@ function App() {
   return (
 
     <>
-      <CartProvider>
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/carrito' element={<Cart/>}/>
-        </Routes>
-      </CartProvider>
-      
+      <AppRouter/>
     </>
   )
 }
