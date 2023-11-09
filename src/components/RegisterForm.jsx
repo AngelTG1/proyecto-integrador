@@ -3,16 +3,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-
 function RegisterForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [contrasenia, setContrasenia] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault(); // Previene que el formulario se envíe automáticamente
 
-    if (name === "" || email === "" || password === "") {
+    if (nombre === "" || apellido === "" || correo === "" || contrasenia === "") {
       // Muestra una notificación si algún campo está vacío
       Swal.fire({
         icon: "error",
@@ -22,10 +22,11 @@ function RegisterForm() {
       });
     } else {
       try {
-        const response = await axios.post("http://localhost:3001/api/usuarios", {
-          name,
-          email,
-          password,
+        const response = await axios.post("http://localhost:3000/api/usuarios", {
+          nombre,
+          apellido,
+          correo,
+          contrasenia,
         });
 
         if (response.status === 201) {
@@ -61,7 +62,7 @@ function RegisterForm() {
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
+          <img
             className="mx-auto h-10 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
@@ -74,16 +75,16 @@ function RegisterForm() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleRegister}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="nombre" className="block text-sm font-medium leading-6 text-gray-900">
                 Nombre
               </label>
               <div className="mt-2">
                 <input
-                  id="name"
-                  name="name"
+                  id="nombre"
+                  name="nombre"
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -91,17 +92,34 @@ function RegisterForm() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="apellido" className="block text-sm font-medium leading-6 text-gray-900">
+                Apellido
+              </label>
+              <div className="mt-2">
+                <input
+                  id="apellido"
+                  name="apellido"
+                  type="text"
+                  value={apellido}
+                  onChange={(e) => setApellido(e.target.value)}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="correo" className="block text-sm font-medium leading-6 text-gray-900">
                 Correo Electrónico
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
+                  id="correo"
+                  name="correo"
                   type="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -110,18 +128,18 @@ function RegisterForm() {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="contrasenia" className="block text-sm font-medium leading-6 text-gray-900">
                   Contraseña
                 </label>
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  id="contrasenia"
+                  name="contrasenia"
                   type="password"
                   autoComplete="new-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={contrasenia}
+                  onChange={(e) => setContrasenia(e.target.value)}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -138,15 +156,15 @@ function RegisterForm() {
             </div>
           </form>
           <Link to="/login">
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Login
-            </a>
-          </p>
+            <p className="mt-10 text-center text-sm text-gray-500">
+              Already a member?{" "}
+              <a
+                href="#"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
+                Login
+              </a>
+            </p>
           </Link>
         </div>
       </div>

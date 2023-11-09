@@ -29,8 +29,20 @@ export function CartProvider ({ children }) {
 
     const removerFromCart = product => {
         setCart(prevState => prevState.filter(item => item.id !== product.id))
+        
 
     }
+
+    const decreaseQuantity = (product) => {
+        const productInCartIndex = cart.findIndex((item) => item.id === product.id);
+        if (productInCartIndex >= 0) {
+          const newCart = [...cart];
+          if (newCart[productInCartIndex].quantity > 1) {
+            newCart[productInCartIndex].quantity -= 1;
+          }
+          setCart(newCart);
+        }
+      };
 
     const clearCart = () => {
         setCart([])
@@ -40,6 +52,7 @@ export function CartProvider ({ children }) {
             cart,
             addToCart,
             removerFromCart,
+            decreaseQuantity,
             clearCart
         }}>
             {children}

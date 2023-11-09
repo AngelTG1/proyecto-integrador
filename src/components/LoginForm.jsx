@@ -7,27 +7,26 @@ import Swal from "sweetalert2";
 
 function LoginForm() {
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [correo, setCorreo] = useState(""); 
+  const [contrasenia, setContrasenia] = useState(""); 
   const [loggedIn, setLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Realiza una solicitud GET para obtener los datos de usuarios
     axios
-      .get("http://localhost:3001/api/usuarios")
+      .get("http://localhost:3000/api/usuarios")
       .then((response) => {
         setUsers(response.data);
       })
       .catch((error) => {
         console.error("Error al obtener datos de usuarios", error);
       });
-  }, []); // Se ejecutará una vez al montar el componente
+  }, []);
 
   const handleLogin = () => {
     // Verifica si las credenciales coinciden con los datos de usuarios
     const user = users.find(
-      (user) => user.email === email && user.password === password
+      (user) => user.correo === correo && user.contrasenia === contrasenia
     );
 
     if (user) {
@@ -77,8 +76,8 @@ function LoginForm() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
                   className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -106,8 +105,8 @@ function LoginForm() {
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={contrasenia}
+                  onChange={(e) => setContrasenia(e.target.value)}
                   autoComplete="current-password"
              
                   className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

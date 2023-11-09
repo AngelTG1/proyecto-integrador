@@ -3,15 +3,20 @@ import { ClearCartIcon, CartIcon, RemoveFromCartIcon } from "./Icons.jsx";
 import { useCart } from "../hooks/useCart.js";
 import CartItem from "./CartItem.jsx";
 import { Link } from "react-router-dom";
-
-
+import SeeUser from "./SeeUser.jsx";
+import ropa from '../assets/ropa.svg'
 
 export function Cart() {
   // const [active, setActive] = useState(false);
   const cartCheckboxId = useId();
-  const { cart, clearCart, addToCart } = useCart();
+  const { cart, clearCart, addToCart,  removerFromCart, decreaseQuantity } = useCart();
 
-  const subtotal = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  const subtotal = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
+
+  
   const shipping = 4.99; // Puedes ajustar esto según tus necesidades
   const total = subtotal + shipping;
 
@@ -21,7 +26,6 @@ export function Cart() {
 
   return (
     <>
-
       {/* <HeaderStore/> */}
       {/* <Link to="/">
         <label
@@ -36,20 +40,28 @@ export function Cart() {
       <input type="checkbox" id={cartCheckboxId} hidden />
       <Link to="/home" >
         <div className=" border-2 border-[#000] w-[47px] h-[47px] rounded-lg flex justify-center items-center">
-          <img src="" alt="" />
+          <img src={ropa} alt="" />
         </div>
       </Link>
 
       <aside className="mx-auto mt-24 max-w-5xl justify-center px-1 md:flex md:space-x-6 xl:px-0">
         <div>
           <ul className="rounded-lg ">
-          <button className="flex gap-2 bg-blue-200 p-3 rounded-lg text-blue-600 font-semibold" onClick={clearCart}>
-          <ClearCartIcon />limpiar carrito
-        </button>
+            
+            
+            <button
+              className="flex gap-2 bg-blue-200 p-3 rounded-lg text-blue-600 font-semibold"
+              onClick={clearCart}
+            >
+              <ClearCartIcon />
+              limpiar carrito
+            </button>
             {cart.map((product) => (
               <CartItem
                 key={product.id}
                 addToCart={() => addToCart(product)}
+                removerFromCart={() => removerFromCart(product)}
+                decreaseQuantity={()=> decreaseQuantity(product)}
                 {...product}
               />
             ))}
@@ -78,7 +90,6 @@ export function Cart() {
           </button>
         </div>
       </aside>
-
     </>
   );
 }

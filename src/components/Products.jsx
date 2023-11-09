@@ -12,14 +12,14 @@ export default function Products ({ products }) {
     return (
         <>
             <main className=' lg:pl-[250px] p-8 pt-72 lg:pt-20'>
-                <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10'>
+                <ul className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                     {products.map(product => { 
                         const isProductInCart = checkProductInCart(product)
                         
                         return (
-                            <li key={product.id} className='flex flex-col gap-1'>
+                            <li key={product.id} className='flex flex-col gap-1 group relativev'>
                                 <div className=' flex items-center justify-center h-56'>
-                                    <img className=' h-full object-cover' src={product.image} alt={product.title} />
+                                    <img className=' h-full lg:h-40 object-cover' src={product.image} alt={product.title} />
                                 </div>
                                 <div>
                                     <strong className='line-clamp-1'>{product.title}</strong> - ${product.price}
@@ -28,8 +28,8 @@ export default function Products ({ products }) {
                                 <div>
                                     <p className='line-clamp-2'>{product.description}</p>
                                 </div>
-                                <div className='flex flex-row'>
-                                    <button className=' text-sm inline-block p-1 bg-[#D61E1E] text-white'>Descuento <span className='font-bold'>$MXN400.99</span></button>
+                                <div className='flex flex-row items-center justify-between'>
+                                    <button className=' text-sm inline-block p-1 bg-[#D61E1E]  text-white'>Descuento <span className='font-bold'>$MXN400.99</span></button>
                                     <img src={corazon} alt="" />
                                 </div>
                                 <div>

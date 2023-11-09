@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import LoginForm from '../components/LoginForm';
 import Cart from '../components/Cart';
 import RegisterForm from '../components/RegisterForm';
+import SeeUser from '../components/SeeUser';
 
 function AppRouter() {
   return (
@@ -17,6 +18,7 @@ function AppRouter() {
             <Route path="/login" element={<LoginForm />} />
             <Route path='/registro' element={<RegisterForm/>} />
             <Route path="/carrito" element={<PrivateRoute element={<Cart />} />} />
+            <Route path='/user' element={<PrivateRoute element={<SeeUser/>} />} />
           </Route>
         </Routes>
     </AuthProvider>
