@@ -13,6 +13,7 @@ function SeeUser() {
                     <p></p>
                     <p>{user.nombre}</p>
                     <p>{user.apellido}</p>
+                    <p>{user.rol}</p>
                     <p></p>
                 </>
             ) : null

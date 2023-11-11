@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 function LoginForm() {
   const { login } = useAuth();
-  const [correo, setCorreo] = useState(""); 
-  const [contrasenia, setContrasenia] = useState(""); 
+  const [correo, setCorreo] = useState("");
+  const [contrasenia, setContrasenia] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
+
+  const {user } = useAuth()
 
   useEffect(() => {
     axios
@@ -39,12 +40,18 @@ function LoginForm() {
         title: "Credenciales incorrectas",
         text: "Por favor, verifica tu correo electrónico y contraseña.",
         confirmButtonText: "OK",
+        timer: "3000"
       });
     }
-  };
+  }
 
   if (loggedIn) {
-    return <Navigate to="/home" />;
+    // Aquí puedes redirigir en función del rol
+    if (user.rol === "cliente") {
+      return <Navigate to="/home" />;
+    } else if (user.rol === "administrador") {
+      return <Navigate to="/home/admin" />;
+    }
   }
 
   return (
@@ -53,7 +60,7 @@ function LoginForm() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=600"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -62,7 +69,7 @@ function LoginForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" >
+          <form className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -94,7 +101,7 @@ function LoginForm() {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    className="font-semibold text-[#4a8549e1]"
                   >
                     Forgot password?
                   </a>
@@ -108,7 +115,6 @@ function LoginForm() {
                   value={contrasenia}
                   onChange={(e) => setContrasenia(e.target.value)}
                   autoComplete="current-password"
-             
                   className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -118,7 +124,7 @@ function LoginForm() {
               <button
                 type="submit"
                 onClick={handleLogin}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-[#4a8549e1] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#5d8c5be1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
@@ -126,15 +132,15 @@ function LoginForm() {
           </form>
 
           <Link to="/registro">
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Registrate
-            </a>
-          </p>
+            <p className="mt-10 text-center text-sm text-gray-500">
+              Not a member?{" "}
+              <a
+                href="#"
+                className="font-semibold leading-6 text-[#4a8549e1] "
+              >
+                Registrate
+              </a>
+            </p>
           </Link>
         </div>
       </div>

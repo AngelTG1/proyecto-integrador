@@ -8,14 +8,9 @@ import InputSearch from "./InputSearch";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import PerfilUser from "./PerfilUser";
-
+import { useCart } from "../hooks/useCart";
 
 export function IconRopa() {
-
-
-  
-
-  console.log
 
   return (
     <>
@@ -29,21 +24,28 @@ export function IconRopa() {
 }
 
 export function IconCart() {
+  const { getCartTotalProducts } = useCart()
   return (
     <>
-      <Link className="" to="/carrito">
-        <div className=" border-2 hover:bg-[#9dc49c] border-[#000] w-[47px] h-[47px] rounded-lg flex justify-center items-center hover:top-1">
+      <Link className=" relative" to="/carrito">
+        <div className=" relative border-2 hover:bg-[#9dc49c] border-[#000] w-[47px] h-[47px] rounded-lg flex justify-center items-center ">
           <img src={cart} alt="" />
+        </div>
+        <div className=" absolute border-2 -top-3 -right-2 bg-[#fff] border-black w-7 h-7 flex items-center justify-center rounded-full ">
+          <p className="text-[#488e76] font-bold text-sm ">{getCartTotalProducts()}</p>
         </div>
       </Link>
     </>
   );
 }
 
-function HeaderStore() {
+function HeaderStore({ value, onChange, onClick }) {
+
+
   const [icons, setIcon] = useState(false);
   const [perfil, setPerfil] = useState(false)
   const { user } = useAuth();
+
 
   const toggleMenu = () => {
     setIcon(!icons);
@@ -74,7 +76,7 @@ function HeaderStore() {
           </div>
 
           <div className="flex relative gap-3">
-            <InputSearch />
+            <InputSearch onChange={onChange} onClick={onClick} value={value} />
             <button onClick={toggleMenuPerfil} className=" relative right-0 border-2 border-[#4A8549] bg-[#E1FFE1] w-[47px] h-[47px] rounded-lg flex justify-center items-center">
               {user ? (
                 <>

@@ -4,9 +4,9 @@ function ButtonOne({prices}) {
   return (
     <>
       <div data-tooltip={`Price:-${prices}`} class="button">
-        <div class="button-wrapper">
-          <div class="text">Buy Now</div>
-          <span class="icon">
+        <div className="button-wrapper">
+          <div className="text">Buy Now</div>
+          <span className="icon">
             <svg
               viewBox="0 0 16 16"
               class="bi bi-cart2"

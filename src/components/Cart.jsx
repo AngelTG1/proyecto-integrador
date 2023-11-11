@@ -1,5 +1,5 @@
 import React, { useId } from "react";
-import { ClearCartIcon, CartIcon, RemoveFromCartIcon } from "./Icons.jsx";
+import { ClearCartIcon, CartIcon, RemoveFromCartIcon } from "./atoms/Icons.jsx";
 import { useCart } from "../hooks/useCart.js";
 import CartItem from "./CartItem.jsx";
 import { Link } from "react-router-dom";
@@ -26,16 +26,7 @@ export function Cart() {
 
   return (
     <>
-      {/* <HeaderStore/> */}
-      {/* <Link to="/">
-        <label
-          onClick={toggleMenu}
-          className="relative bg-blue-500 w-10 h-10 items-center justify-center text-white rounded-full"
-          htmlFor="cart"
-        >
-          Home
-        </label>
-      </Link> */}
+
 
       <input type="checkbox" id={cartCheckboxId} hidden />
       <Link to="/home" >
@@ -68,21 +59,21 @@ export function Cart() {
           </ul>
         </div>
 
-        <div class="mt-6 h-full rounded-lg bg-[#F9FAFB] p-6 md:mt-0 md:w-96">
-          <div class="mb-2 flex justify-between">
-            <p class="text-gray-700">Subtotal</p>
-            <p class="text-gray-700">${subtotal.toFixed(2)}</p>
+        <div className="mt-6 h-full rounded-lg bg-[#F9FAFB] p-6 md:mt-0 md:w-96">
+          <div className="mb-2 flex justify-between">
+            <p className="text-gray-700">Subtotal</p>
+            <p className="text-gray-700">${subtotal.toFixed(2)}</p>
           </div>
-          <hr class="my-4" />
-          <div class="flex justify-between">
-            <p class="text-gray-700">Shipping</p>
-            <p class="text-gray-700">${shipping.toFixed(2)}</p>
+          <hr className="my-4" />
+          <div className="flex justify-between">
+            <p className="text-gray-700">Shipping</p>
+            <p className="text-gray-700">${shipping.toFixed(2)}</p>
           </div>
-          <hr class="my-4" />
-          <div class="flex justify-between">
-            <p class="text-lg font-bold">Total</p>
-            <div class="">
-              <p class="mb-1 text-lg font-bold">${total.toFixed(2)} MXM</p>
+          <hr className="my-4" />
+          <div className="flex justify-between">
+            <p className="text-lg font-bold">Total</p>
+            <div className="">
+              <p className="mb-1 text-lg font-bold">${total.toFixed(2)} MXM</p>
             </div>
           </div>
           <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-white hover:bg-blue-600">

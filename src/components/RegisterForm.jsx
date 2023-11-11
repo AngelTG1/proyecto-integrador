@@ -8,11 +8,13 @@ function RegisterForm() {
   const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
   const [contrasenia, setContrasenia] = useState("");
+  const [rol, setRol] = useState("cliente");
+
 
   const handleRegister = async (e) => {
     e.preventDefault(); // Previene que el formulario se envíe automáticamente
 
-    if (nombre === "" || apellido === "" || correo === "" || contrasenia === "") {
+    if (nombre === "" || apellido === "" || correo === "" || contrasenia === "" || rol === "") {
       // Muestra una notificación si algún campo está vacío
       Swal.fire({
         icon: "error",
@@ -27,6 +29,7 @@ function RegisterForm() {
           apellido,
           correo,
           contrasenia,
+          rol,
         });
 
         if (response.status === 201) {
@@ -64,7 +67,7 @@ function RegisterForm() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=600"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -147,9 +150,28 @@ function RegisterForm() {
             </div>
 
             <div>
+              <label htmlFor="rol" className="block text-sm font-medium leading-6 text-gray-900">
+                Rol
+              </label>
+              <div className="mt-2">
+                <select
+                  id="rol"
+                  name="rol"
+                  value={rol}
+                  onChange={(e) => setRol(e.target.value)}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                >
+                  <option value="cliente">Cliente</option>
+                  <option value="administrador">Administrador</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-[#4a8549e1] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#5d8c5be1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Registrarse
               </button>
@@ -160,7 +182,7 @@ function RegisterForm() {
               Already a member?{" "}
               <a
                 href="#"
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                className="font-semibold leading-6 text-[#4a8549e1] hover:text-indigo-500"
               >
                 Login
               </a>
