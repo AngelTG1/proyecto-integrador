@@ -7,12 +7,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const login = (userData) => {
-    // Realiza la lógica de inicio de sesión y guarda el usuario en el estado
-    setUser(userData);
+    setUser({
+      ...userData,
+      id: userData.id,
+    });
   };
 
   const logout = () => {
-    // Lógica para cerrar sesión y eliminar el usuario del estado
     setUser(null);
   };
 
@@ -24,6 +25,12 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
-};
+  const authContext = useContext(AuthContext);
 
+  if (!authContext) {
+    console.error('Auth context is undefined. Check if AuthProvider is rendered.');
+    return { user: null }; // Provide a default value
+  }
+
+  return authContext;
+};

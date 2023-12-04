@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useFilters } from '../hooks/useFilters';
 import Header from '../components/molecules/Header';
-import Products from '../components/Products';
-import HeaderStore from '../components/HeaderStore';
+import Products from '../components/organims/Products';
+import HeaderStore from '../components/organims/HeaderStore';
 import CategoryTop from '../components/organims/CategoryTop';
 
 function Home() {
@@ -15,7 +15,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/products')
+      .get('http://54.86.213.148:3000/api/products')
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error al obtener productos', error));
   }, []);
@@ -61,6 +61,7 @@ function Home() {
           <div className="image-modal-overlay" onClick={closeImageModal}>
             <div className="image-modal">
               <img
+                className=' object-cover'
                 src={selectedImage}
                 alt="Zoomed Image"
                 onMouseEnter={() => handleImageZoom(selectedImage)}

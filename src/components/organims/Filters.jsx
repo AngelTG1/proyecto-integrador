@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useId } from "react";
-import { useFilters } from "../hooks/useFilters";
-import logo from "../assets/logo.svg";
-import CheckColors from "./molecules/CheckColors";
-import CheckSize from "./molecules/CheckSize";
+import { useFilters } from "../../hooks/useFilters";
+import logo from "../../assets/logo.svg";
+import CheckColors from "../molecules/CheckColors";
+import CheckSize from "../molecules/CheckSize";
+import filtro from '../../assets/filtros.svg'
+import close from '../../assets/close.svg'
 
 export default function Filters() {
   const [active, setActive] = useState(false);
@@ -85,16 +87,16 @@ export default function Filters() {
   return (
     <>
       <section
-        className={`scrols fixed top-0 w-60 h-full overflow-y-scroll border-r-[.1px] shadow-lg border-[#b8b8b8] p-8 flex flex-col gap-12 bg-[#fff] lg:left-0 transition-all duration-300 ease-in-out z-50 ${
+        className={`scrols fixed top-0 w-60 h-full overflow-y-scroll border-r-[.1px] shadow-lg border-[#b8b8b8] p-8 flex flex-col gap-12 bg-[#fff] lg:left-0 transition-all duration-300 ease-in-out z-30 ${
           active ? "left-0" : "-left-full"
         }`}
       >
         <img src={logo} alt="" />
         <div>
-          <label className="font-bold">All</label>
+          {/* <label className="font-bold">Todo</label> */}
           <div className=" relative flex flex-row gap-1">
             <input
-              className=" w-10 h-10 cursor-pointer dark:border-white-400/20 dark:scale-100 transition-all duration-500 ease-in-out dark:hover:scale-110 dark:checked:scale-100 "
+              className=" w-5 h-5 cursor-pointer dark:border-white-400/20 dark:scale-100 transition-all duration-500 ease-in-out dark:hover:scale-110 dark:checked:scale-100 "
               type="checkbox"
               id="allCheckbox"
               onChange={() => {
@@ -117,7 +119,7 @@ export default function Filters() {
                 selectedColor === "all"
               }
             />
-            <span>All</span>
+            <span>Todo</span>
           </div>
         </div>
 
@@ -249,7 +251,7 @@ export default function Filters() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <label className="font-bold">Guy</label>
+          <label className="font-bold">Tipo</label>
           <div className="grid grid-cols-1 gap-2 items-center justify-center">
             <div className="flex flex-row gap-1">
               <input
@@ -275,6 +277,19 @@ export default function Filters() {
                 checked={selectedType === "playera"}
               />
               <span>Playera</span>
+            </div>
+
+            <div className="flex flex-row gap-1">
+              <input
+                className="cursor-pointer"
+                type="radio"
+                id="menGuy"
+                name="guy"
+                onChange={handleChangeType}
+                value="baño"
+                checked={selectedType === "baño"}
+              />
+              <span>Traje de baño</span>
             </div>
 
             <div className="flex flex-row gap-1">
@@ -329,6 +344,19 @@ export default function Filters() {
               <span>Camiseta</span>
             </div>
 
+            <div className="flex flex-row gap-1">
+              <input
+                className="cursor-pointer"
+                type="radio"
+                id="menGuy"
+                name="guy"
+                onChange={handleChangeType}
+                value="camisa"
+                checked={selectedType === "camisa"}
+              />
+              <span>Camisa</span>
+            </div>
+
           </div>
         </div>
 
@@ -346,11 +374,12 @@ export default function Filters() {
           <span className="text-sm">{filters.minPrice}</span>
         </div>
       </section>
+      
       <button
         onClick={toggleMenu}
-        className=" bg-blue-600 text-white fixed bottom-8 right-6 p-2 text-lg rounded-full transition-all ease-in-out duration-200  z-50"
+        className=" bg-[#BFD6BE] lg:hidden  text-white fixed bottom-8 right-6 p-2 text-lg rounded-full transition-all ease-in-out duration-200  z-50"
       >
-        {active ? "desactivar" : "activar"}
+        {active ? <img className="  w-8" src={close} alt="" /> : <img className="w-8" src={filtro} alt="" />}
       </button>
     </>
   );

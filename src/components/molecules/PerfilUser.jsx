@@ -1,11 +1,11 @@
 import React from "react";
-import "../assets/styles/perfilUser.css";
+import "../../assets/styles/perfilUser.css";
 import { Link } from "react-router-dom";
 
-function PerfilUser() {
+function PerfilUser({ className }) {
   return (
     <>
-      <div className="input ">
+      <div className="input norder-2">
         <Link to="/user" className="value flex">
           <button className="value flex items-center">
             <svg

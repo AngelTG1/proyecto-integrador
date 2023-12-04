@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingAdmin from '../components/LandingAdmin'
+import LandingAdmin from '../components/organims/LandingAdmin'
 import HeaderAdmin from '../components/organims/HeaderAdmin'
 
 function HomeAdmin() {

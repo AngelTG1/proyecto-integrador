@@ -8,7 +8,7 @@ function InputSearch({ onChange, value, onClick }) {
   return (
     <div className="flex relative">
       <input
-        className="w-full h-[47px] rounded-lg outline-none border-2 border-[#000] text-[#555555] font-bold px-3"
+        className="w-full inline-block h-[47px] rounded-lg outline-none border-2 border-[#000] text-[#555555] font-bold px-3"
         type="text"
         placeholder="Search"
         value={value}

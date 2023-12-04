@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductAdmin from './ProductAdmin';
-import HeaderAdmin from './organims/HeaderAdmin';
+import DeleteProduct from './DeleteProduct';
 
 function LandingAdmin() {
   const [products, setProducts] = useState([]);
@@ -9,7 +9,7 @@ function LandingAdmin() {
 
   useEffect(() => {
     // Realiza una solicitud GET a tu API para obtener los productos
-    axios.get('http://localhost:3000/api/products')
+    axios.get('http://54.86.213.148:3000/api/products')
       .then((response) => {
         setProducts(response.data); // Establece los productos en el estado
         setLoading(false);
@@ -26,7 +26,7 @@ function LandingAdmin() {
         <p>Cargando productos...</p>
       ) : (
         <>
-          
+          <DeleteProduct />
           <ProductAdmin products={products} />
         </>
       )}

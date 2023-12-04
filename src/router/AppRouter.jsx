@@ -2,16 +2,14 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import HeaderStore from '../components/HeaderStore';
 import Home from '../pages/Home';
 import LoginForm from '../components/organims/LoginForm';
-import Cart from '../components/Cart';
-import RegisterForm from '../components/RegisterForm';
-import SeeUser from '../components/SeeUser';
-import LandingAdmin from '../components/LandingAdmin';
+import Cart from '../components/organims/Cart';
+import RegisterForm from '../components/molecules/RegisterForm';
 import HomeAdmin from '../pages/HomeAdmin';
 import FormAddRopa from '../components/organims/FormAddRopa';
 import Landing from '../components/organims/Landing';
+
 
 function AppRouter() {
   return (
@@ -20,13 +18,12 @@ function AppRouter() {
           
             <Route index path="/home" element={<PrivateRoute allowedRoles={['cliente']} element={<Home />} />} />
             <Route path="/carrito" element={<PrivateRoute allowedRoles={['cliente']} element={<Cart />} />} />
-            <Route index path="/user" element={<PrivateRoute allowedRoles={['cliente']} element={<SeeUser />} />} />
-            {/* <Route  path="/home/admin" element={<PrivateRoute allowedRoles={['cliente']} element={<LandingAdmin />} />} /> */}
             <Route index path='/home/admin' element={<PrivateRoute allowedRoles={['administrador']} element={<HomeAdmin/>} />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path='/registro' element={<RegisterForm/>} />
             <Route path='/add' element={<PrivateRoute allowedRoles={['administrador']} element={<FormAddRopa/>} />} />
             <Route path='/' element={<Landing/>} />
+
         </Routes>
     </AuthProvider>
   );

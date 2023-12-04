@@ -1,11 +1,18 @@
 // Products.jsx
-import { useCart } from '../hooks/useCart.js';
-import corazon from '../assets/corazon.svg';
-import ButtonOne from './atoms/ButtonOne.jsx';
-import ButtonTwo from './atoms/ButtonTwo.jsx';
+import { useCart } from '../../hooks/useCart.js';
+import ButtonOne from '../atoms/ButtonOne.jsx';
+import ButtonTwo from '../atoms/ButtonTwo.jsx';
+
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function Products({ products, onImageClick }) {
-  const { addToCart, cart, removerFromCart } = useCart();
+  const {user} = useAuth()
+  // const newproduct = {
+  //   id: product.id,
+  //   title: product.title,
+  //   comprador: user.id
+  // }
+  const { addToCart, cart, removeFromCart } = useCart();
 
   const checkProductInCart = (product) => {
     return cart.some((item) => item.id === product.id);
@@ -13,8 +20,8 @@ export default function Products({ products, onImageClick }) {
 
   return (
     <>
-      <main className='lg:pl-[250px] p-1 pt-[90px] lg:pt-[95px] bg-gray-100'>
-        <ul className='mt-6 grid grid-cols-1 gap-x-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
+      <main className='lg:pl-[250px]  pt-[70px] lg:pt-[69px] bg-gray-100'>
+        <ul className='mt-6 grid grid-cols-2  gap-x-1 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8'>
           {products.map((product) => {
             const isProductInCart = checkProductInCart(product);
 
@@ -29,24 +36,21 @@ export default function Products({ products, onImageClick }) {
                   />
                 </div>
                 <div>
-                  <strong className='line-clamp-1'>{product.title}</strong> - ${product.price}
+                  <strong className='line-clamp-1'>{product.title}</strong>  
+                  <p className=' font-medium  hidden sm:table-cell text-xl'>${product.price}</p>
                 </div>
                 <div>
                   <p className='line-clamp-2'>{product.description}</p>
                 </div>
                 <div className='flex flex-row items-center justify-between'>
-                  <button className='text-sm inline-block p-1 bg-[#D61E1E] text-white'>
-                    Descuento <span className='font-bold'>$MXN400.99</span>
-                  </button>
-                  <img src={corazon} alt='' />
+
+                  {/* <img src={corazon} alt='' /> */}
                 </div>
-                <div>
-                  <p>{product.color}</p>
-                </div>
+
                 <div>
                   <button
                     className='h-10 rounded-lg items-center text-black justify-center'
-                    onClick={() => (isProductInCart ? removerFromCart(product) : addToCart(product))}
+                    onClick={() => (isProductInCart ? removeFromCart(product) : addToCart(product))}
                   >
                     {
                       isProductInCart

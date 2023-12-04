@@ -4,6 +4,8 @@
 // import { CartProvider } from './context/cart.jsx';
 // import LoginForm from './components/LoginForm.jsx';
 
+import { AuthProvider } from "./context/AuthContext"
+import { CartProvider } from "./context/cart"
 import AppRouter from "./router/AppRouter"
 
 
@@ -13,7 +15,11 @@ function App() {
   return (
 
     <>
-      <AppRouter/>
+      <AuthProvider>
+        <CartProvider>
+          <AppRouter/>
+        </CartProvider>
+      </AuthProvider>
     </>
   )
 }

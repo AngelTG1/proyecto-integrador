@@ -3,19 +3,20 @@ import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import logo from '../../assets/logo.svg'
 
 function LoginForm() {
   const { login } = useAuth();
   const [correo, setCorreo] = useState("");
   const [contrasenia, setContrasenia] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
-  const {user } = useAuth()
+  const { user } = useAuth();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/usuarios")
+      .get("http://54.86.213.148:3000/api/usuarios")
       .then((response) => {
         setUsers(response.data);
       })
@@ -25,7 +26,6 @@ function LoginForm() {
   }, []);
 
   const handleLogin = () => {
-    // Verifica si las credenciales coinciden con los datos de usuarios
     const user = users.find(
       (user) => user.correo === correo && user.contrasenia === contrasenia
     );
@@ -34,7 +34,6 @@ function LoginForm() {
       login(user);
       setLoggedIn(true);
     } else {
-      // Mostrar una notificación SweetAlert2 en caso de credenciales incorrectas
       Swal.fire({
         icon: "error",
         title: "Credenciales incorrectas",
@@ -46,7 +45,6 @@ function LoginForm() {
   }
 
   if (loggedIn) {
-    // Aquí puedes redirigir en función del rol
     if (user.rol === "cliente") {
       return <Navigate to="/home" />;
     } else if (user.rol === "administrador") {
@@ -59,8 +57,8 @@ function LoginForm() {
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=600"
+            className="mx-auto h-10 w-48"
+            src={logo}
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
